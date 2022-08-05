@@ -4,37 +4,40 @@ import './index.css'
 
 
 export default function Index(props) {
-    const [flag,setFlag]=React.useState(true)
-    React.useEffect(()=>{
-      console.log(props);
-
-    })
-    const onClose = (e) => {
-        console.log(e, 'I was closed.');
-        setFlag(false)
-      };
-    const click = ()=>{
-      console.log(1);
-      setFlag(true)
+var [opacity, setOpacity] = React.useState(0)
+var time1, time2;
+//增加透明度
+const addOpacity = () => {
+    if (opacity > 1) {
+        clearInterval(time1);
+        time2 = setInterval(deleteOpacity, 75)
     }
+    opacity += 0.1;
+    setOpacity(opacity)
+}
+//减少透明度
+const deleteOpacity = () => {
+    if (opacity < 0) {
+        clearInterval(time2);
+    }
+    opacity -= 0.05;
+    setOpacity(opacity)
+}
+    React.useEffect(()=>{
+      if(!time1){
+        time1 = setInterval(addOpacity, 50);
+      }
+    },[])
+ 
   return (
     <div>
-        {flag? <Alert
+        <Alert
+        style={{opacity}}
         className='alert-test'
-      message="Warning Text Warning Text Warning TextW arning Text Warning Text Warning TextWarning Text"
-      type="warning"
-      closable
-      onClose={onClose}
-    />:''}
-     <Alert
-      message="Error Text"
-      description="Error Description Error Description Error Description Error Description Error Description Error Description"
-      type="error"
-      closable
-      onClose={onClose}
-      
-    />
-    
+        type="warning"
+        closable
+        description={props.meg}
+    />   
     </div>
   )
 }

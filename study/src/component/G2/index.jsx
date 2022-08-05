@@ -12,9 +12,6 @@ const data = [
     { type: '分类五', value: 10 },
 ];
 
-
-
-
 export default function Index() {
     useEffect(() => {
         const tempNode = document.getElementById('container')
