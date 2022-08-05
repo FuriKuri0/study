@@ -31,13 +31,7 @@ const deleteOpacity = () => {
  
   return (
     <div>
-        <Alert
-        style={{opacity}}
-        className='alert-test'
-        type="warning"
-        closable
-        description={props.meg}
-    />   
+      {props.type?<Alert className='alert-test' style={{opacity}} message={props.msg} type="success" showIcon />:<Alert className='alert-test' style={{opacity}} message={props.msg} type="error" showIcon /> }
     </div>
   )
 }

@@ -14,16 +14,23 @@ import MyAlert from './component/alert'
 
 export default function App() {
     var [flag, setFlag] = React.useState(0)
+    const [msg, setMsg] = React.useState({})
     var time;
     const showAlert = () => {
+        React.axios('post', 'http://106.13.18.48/users', 60001,
+            { username: 'FuriKuri0', password: 'Zxc2345665432' }).then(
+                res => { setMsg({ msg: res.msg, type: 1 }); },
+                error => setMsg({ msg: error, type: 0 }),
+            )
         setFlag(1);
         if (!time) {
             time = setTimeout(() => setFlag(0), 2000)
         }
     }
+
     return (
         <div>
-            {flag ? <MyAlert meg='警告内容啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊' /> : ''}
+            {flag ? <MyAlert {...msg} /> : ''}
             <G2 />
             <button onClick={showAlert}>test</button>
             {/* <LineChart /><br /><br /><br /><br /> */}
