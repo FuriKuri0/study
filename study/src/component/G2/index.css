@@ -1,0 +1,10 @@
+#container {
+    position: absolute;
+    left: 31.25vw !important;
+}
+
+canvas {
+    width: 26.5789vw !important;
+    height: 26.5789vw !important;
+
+}
